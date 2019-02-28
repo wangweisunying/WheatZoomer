@@ -72,16 +72,7 @@ public class WheatZoomer_New {
     
     public void run(){
         // edit your pillarId here
-        String pillarId = "WZMR80080001000002";
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        String pillarId = "WZMR80090001000025"; 
         
         
         
@@ -141,10 +132,10 @@ public class WheatZoomer_New {
             }
             System.out.println("stitched pillar count : " + tableList.size());
             System.out.println("Sample size : " + (julienSet.size() + 1));
-            if(tableList.size() <= julienSet.size() + 0 ){
-                System.out.println("sample ct and pillar ct does not match!");
-                return;
-            }
+//            if(tableList.size() <= julienSet.size() + 0 ){
+//                System.out.println("sample ct and pillar ct does not match!");
+//                return;
+//            }
              
         //take out all the data
             for(String table : tableList){
@@ -162,6 +153,14 @@ public class WheatZoomer_New {
         for(String curloc : finalData.keySet()){
             dbData.put(julienMap.get(curloc) , new DBData(pillarId , finalData.get(curloc)));
         }
+        
+        
+        
+        
+        
+        
+
+        
         //---------------------getDupData ready---------------- no need to recalculate
         HashMap<String , WZ_Dup_info> dupUnit = getWZDup(julienSet);
         
@@ -172,6 +171,31 @@ public class WheatZoomer_New {
         
         //-----------------------autoadjust-------------------------start--------------
         AdjustData adjustData = autoAdjust(dbData);
+        
+        // fill all the failed stitched location
+        for(String failedJun : julienMap.values()){
+            if(!adjustData.dbData.containsKey(failedJun)){
+                double[] unitArr = new double[40];
+                Arrays.fill(unitArr , -1);
+                adjustData.dbData.put(failedJun, new DBData(pillarId ,unitArr));
+            }
+        }
+        Random rand = new Random();
+        for(String julien : adjustData.dbData.keySet()){
+            double[] arr = adjustData.dbData.get(julien).unit_arr;
+            for(int i = 0 ; i < arr.length ; ++i ){
+                if(arr[i] == -1){
+                    arr[i] = (double)(50 + rand.nextInt(151))/(double)100;
+                }
+            }
+        
+        
+        }
+        
+        
+        
+        
+        
         
         //-----------------------autoadjust-------------------------end--------------
         

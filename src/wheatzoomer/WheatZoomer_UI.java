@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import javax.swing.JButton;
@@ -183,7 +184,15 @@ public class WheatZoomer_UI implements TableCellRenderer {
         frame.getContentPane().add(selectAll);
         frame.getContentPane().add(recalculate);
         frame.getContentPane().add(insert);
+      
         for(int i = 0 ; i < Qc.length ; i ++){
+            if(Qc[i] == null || QcText[i] == null){
+                Qc[i] = new JLabel("Qc" + i);
+                QcText[i] = new JTextField("2.32");
+                frame.getContentPane().add(Qc[i]);
+                frame.getContentPane().add(QcText[i]);  
+                continue;
+            }
             frame.getContentPane().add(Qc[i]);
             frame.getContentPane().add(QcText[i]);  
         }
