@@ -80,6 +80,10 @@ public class WheatZoomer_New {
         
         
         
+        
+        
+        
+        
         //init container
         HashMap<String ,DBData> dbData = new HashMap();
         HashMap<String , double[]> finalData = new HashMap();
@@ -381,7 +385,8 @@ public class WheatZoomer_New {
                 String pass = "PASS";
                 for(int i = 0 ; i < map.get(julien_barcode).unit_arr.length ; i++){
                     if(map.get(julien_barcode).unit_arr[i] < 0){
-                        pass = "FAIL";  
+                        pass = "PASS";
+//                        pass = "FAIL";  
                     }
                     double unit = map.get(julien_barcode).unit_arr[i];
                     unit = unit > 3 ? (2 + unit - (int)(unit)) : unit;
